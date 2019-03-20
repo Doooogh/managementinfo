@@ -10,7 +10,6 @@ layui.use(['form','jquery',"layer"],function() {
         layer.alert("请先将项目部署到 localhost 下再进行访问【建议通过tomcat、webstorm、hb等方式运行，不建议通过iis方式运行】，否则部分数据将无法显示");
     }else{    //判断是否处于锁屏状态【如果关闭以后则未关闭浏览器之前不再显示】
         if(window.sessionStorage.getItem("lockcms") != "true" && window.sessionStorage.getItem("showNotice") != "true"){
-            showNotice();
         }
     }
 
@@ -22,7 +21,7 @@ layui.use(['form','jquery',"layer"],function() {
         $("#userFace").attr("src","../../images/face.jpg");
     }
 
-    //公告层
+  /*  //公告层
     function showNotice(){
         layer.open({
             type: 1,
@@ -44,16 +43,7 @@ layui.use(['form','jquery',"layer"],function() {
                 tipsShow();
             }
         });
-    }
-    function tipsShow(){
-        window.sessionStorage.setItem("showNotice","true");
-        if($(window).width() > 432){  //如果页面宽度不足以显示顶部“系统公告”按钮，则不提示
-            layer.tips('系统公告躲在了这里', '#userInfo', {
-                tips: 3,
-                time : 1000
-            });
-        }
-    }
+    }*/
     $(".showNotice").on("click",function(){
         showNotice();
     })

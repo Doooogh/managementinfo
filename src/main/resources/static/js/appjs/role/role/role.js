@@ -57,15 +57,7 @@ function load() {
 								},
 																{
 									field : 'sign', 
-									title : '权限所有' 
-								},
-																{
-									field : 'createtime', 
-									title : '创建时间' 
-								},
-																{
-									field : 'updatetime', 
-									title : '修改时间' 
+									title : '角色描述'
 								},
 																{
 									title : '操作',

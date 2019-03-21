@@ -20,7 +20,7 @@ function save() {
 		success : function(data) {
 			if (data.code == 0) {
 				parent.layer.msg("操作成功");
-				parent.reLoad();
+                parent.location.reload();
 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 				parent.layer.close(index);
 
@@ -36,14 +36,28 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+            parentId : {
 				required : true
-			}
+			},
+            name : {
+                required : true
+            },
+            type : {
+                required : true
+            }
+
 		},
 		messages : {
-			name : {
-				required : icon + "请输入姓名"
-			}
+            parentId : {
+                required : icon + "请输入父id"
+            },
+            name : {
+                required : icon + "请输入权限描述"
+            },
+            type : {
+                required : icon + "请输入类型"
+            },
+
 		}
 	})
 }

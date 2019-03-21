@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 
+	@Autowired
 	private UserRoleDao userRoleDao;
 	
 	@Override
@@ -41,28 +42,33 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int save(UserDO user){
 		int b=userDao.save(user);
-		Integer userId=user.getUserId();
-		userRoleDao.deleteByUserId(userId);
-		List<Integer> roleIds = user.getRoleIds();
-		List<UserRoleDO> userRoles=new ArrayList<>();
-		for (Integer roleId : roleIds) {
-			UserRoleDO userRole=new UserRoleDO();
-			userRole.setRoleId(roleId);
-			userRole.setUserId(userId);
-			userRoles.add(userRole);
+
+		if(b>0){
+			Integer userId=userDao.getByUsername(user.getUsername()).getUserId();
+			List<Integer> roleIds = user.getRoleIds();
+			List<UserRoleDO> userRoles=new ArrayList<>();
+			for (Integer roleId : roleIds) {
+				UserRoleDO userRole=new UserRoleDO();
+				userRole.setRoleId(roleId);
+				userRole.setUserId(userId);
+				userRoles.add(userRole);
+			}
+			for (UserRoleDO userRole : userRoles) {
+				System.out.println(userRole.getUserId()+",,,"+userRole.getRoleId());
+			}
+			int a=0;
+			System.out.println(userRoles.size()+"======================");
+			if(userRoles.size()>0) {
+				a = userRoleDao.batchSave(userRoles);
+			}
+			if(a>0){
+				return 1;
+			}
+			return 0;
+		}else{
+			return 0;
 		}
-		for (UserRoleDO userRole : userRoles) {
-			System.out.println(userRole.getUserId()+",,,"+userRole.getRoleId());
-		}
-		int a=0;
-		System.out.println(userRoles.size()+"======================");
-		if(userRoles.size()>0) {
-			a = userRoleDao.batchSave(userRoles);
-		}
-		if(a>0&&b>0){
-			return 1;
-		}
-		return 0;
+
 	}
 	
 	@Override

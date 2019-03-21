@@ -1,13 +1,54 @@
+var  perIds;
 $().ready(function() {
+    getMenuTreeData();
 	validateRule();
 });
 
 $.validator.setDefaults({
 	submitHandler : function() {
+        getAllSelectNodes();
 		save();
 	}
 });
+
+function getMenuTreeData() {
+    $.ajax({
+        type : "GET",
+        url : "/permission/permission/tree/",
+        success : function(data) {
+            loadMenuTree(data);
+        },
+        error:function () {
+            layer.msg("服务器错误");
+        }
+    });
+}
+function loadMenuTree(perTree) {
+    $('#perTree').jstree({
+        "plugins" : [ "wholerow", "checkbox" ],
+        'core' : {
+            'data' : perTree
+        },
+        "checkbox" : {
+            //"keep_selected_style" : false,
+            //"undetermined" : true
+            //"three_state" : false,
+            //"cascade" : ' up'
+        }
+    });
+    $('#perTree').jstree('open_all');
+}
+function getAllSelectNodes() {
+    var ref = $('#perTree').jstree(true); // 获得整个树
+    perIds = ref.get_selected(); // 获得所有选中节点的，返回值为数组
+    $("#perTree").find(".jstree-undetermined").each(function(i, element) {
+        perIds.push($(element).closest('.jstree-node').attr("id"));
+    });
+    console.log(perIds);
+}
 function save() {
+    $("#perIds").val(perIds);
+    alert(perIds);
 	$.ajax({
 		cache : true,
 		type : "POST",

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.info.managementinfo.info.major.dao.MajorDao">
+
+	<select id="get" resultType="com.graduation.info.managementinfo.info.major.domain.MajorDO">
+		select `id`,`name`,`cdcdcd`,`dedede` from major where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.graduation.info.managementinfo.info.major.domain.MajorDO">
+		select `id`,`name`,`cdcdcd`,`dedede` from major
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="cdcdcd != null and cdcdcd != ''"> and cdcdcd = #{cdcdcd} </if>
+		  		  <if test="dedede != null and dedede != ''"> and dedede = #{dedede} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from major
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="cdcdcd != null and cdcdcd != ''"> and cdcdcd = #{cdcdcd} </if>
+		  		  <if test="dedede != null and dedede != ''"> and dedede = #{dedede} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.graduation.info.managementinfo.info.major.domain.MajorDO" useGeneratedKeys="true" keyProperty="id">
+		insert into major
+		(
+			`name`, 
+			`cdcdcd`, 
+			`dedede`
+		)
+		values
+		(
+			#{name}, 
+			#{cdcdcd}, 
+			#{dedede}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.graduation.info.managementinfo.info.major.domain.MajorDO">
+		update major 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="cdcdcd != null">`cdcdcd` = #{cdcdcd}, </if>
+			<if test="dedede != null">`dedede` = #{dedede}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from major where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from major where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

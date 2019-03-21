@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.info.managementinfo.info.subm.dao.SubMDao">
+
+	<select id="get" resultType="com.graduation.info.managementinfo.info.subm.domain.SubMDO">
+		select `id`,`sub_id`,`m_id` from sub_m where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.graduation.info.managementinfo.info.subm.domain.SubMDO">
+		select `id`,`sub_id`,`m_id` from sub_m
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="subId != null and subId != ''"> and sub_id = #{subId} </if>
+		  		  <if test="mId != null and mId != ''"> and m_id = #{mId} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from sub_m
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="subId != null and subId != ''"> and sub_id = #{subId} </if>
+		  		  <if test="mId != null and mId != ''"> and m_id = #{mId} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.graduation.info.managementinfo.info.subm.domain.SubMDO">
+		insert into sub_m
+		(
+			`id`, 
+			`sub_id`, 
+			`m_id`
+		)
+		values
+		(
+			#{id}, 
+			#{subId}, 
+			#{mId}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.graduation.info.managementinfo.info.subm.domain.SubMDO">
+		update sub_m 
+		<set>
+			<if test="subId != null">`sub_id` = #{subId}, </if>
+			<if test="mId != null">`m_id` = #{mId}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from sub_m where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sub_m where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

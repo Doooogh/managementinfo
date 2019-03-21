@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.info.managementinfo.info.scsub.dao.ScSubDao">
+
+	<select id="get" resultType="com.graduation.info.managementinfo.info.scsub.domain.ScSubDO">
+		select `id`,`sc_id`,`sub_id` from sc_sub where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.graduation.info.managementinfo.info.scsub.domain.ScSubDO">
+		select `id`,`sc_id`,`sub_id` from sc_sub
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="scId != null and scId != ''"> and sc_id = #{scId} </if>
+		  		  <if test="subId != null and subId != ''"> and sub_id = #{subId} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from sc_sub
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="scId != null and scId != ''"> and sc_id = #{scId} </if>
+		  		  <if test="subId != null and subId != ''"> and sub_id = #{subId} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.graduation.info.managementinfo.info.scsub.domain.ScSubDO" useGeneratedKeys="true" keyProperty="id">
+		insert into sc_sub
+		(
+			`sc_id`, 
+			`sub_id`
+		)
+		values
+		(
+			#{scId}, 
+			#{subId}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.graduation.info.managementinfo.info.scsub.domain.ScSubDO">
+		update sc_sub 
+		<set>
+			<if test="scId != null">`sc_id` = #{scId}, </if>
+			<if test="subId != null">`sub_id` = #{subId}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from sc_sub where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sc_sub where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

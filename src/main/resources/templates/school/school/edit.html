@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${school.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">学校名字：</label>
+								<div class="col-sm-8">
+									<input id="name" name="name" th:value="${school.name}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">招生简章：</label>
+								<div class="col-sm-8">
+									<input id="enrollmentGuide" name="enrollmentGuide" th:value="${school.enrollmentGuide}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">试题库：</label>
+								<div class="col-sm-8">
+									<input id="itemBank" name="itemBank" th:value="${school.itemBank}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备用字段1：</label>
+								<div class="col-sm-8">
+									<input id="aaaa" name="aaaa" th:value="${school.aaaa}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备用字段2：</label>
+								<div class="col-sm-8">
+									<input id="bbbb" name="bbbb" th:value="${school.bbbb}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备用字段1：</label>
+								<div class="col-sm-8">
+									<input id="cccc" name="cccc" th:value="${school.cccc}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备用字段：</label>
+								<div class="col-sm-8">
+									<input id="dddd" name="dddd" th:value="${school.dddd}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/school/school/edit.js">
+	</script>
+</body>
+</html>

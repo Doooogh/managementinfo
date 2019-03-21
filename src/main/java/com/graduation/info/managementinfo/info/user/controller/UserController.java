@@ -1,8 +1,13 @@
 package com.graduation.info.managementinfo.info.user.controller;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.graduation.info.managementinfo.info.role.domain.RoleDO;
+import com.graduation.info.managementinfo.info.role.service.RoleService;
+import com.graduation.info.managementinfo.info.userrole.service.UserRoleService;
 import com.graduation.info.managementinfo.system.utils.PageUtils;
 import com.graduation.info.managementinfo.system.utils.Query;
 import com.graduation.info.managementinfo.system.utils.R;
@@ -34,46 +39,67 @@ import com.graduation.info.managementinfo.info.user.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	
+
+	@Autowired
+	private RoleService roleService;
+
+	@Autowired
+	private UserRoleService userRoleService;
+
 	@GetMapping()
 	@RequiresPermissions("user:user:user")
 	String User(){
-	    return "user/user/user";
+		return "user/user/user";
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("user:user:user")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
-        Query query = new Query(params);
+		Query query = new Query(params);
 		List<UserDO> userList = userService.list(query);
 		int total = userService.count(query);
 		PageUtils pageUtils = new PageUtils(userList, total);
 		return pageUtils;
 	}
-	
+
 	@GetMapping("/add")
 	@RequiresPermissions("user:user:add")
-	String add(){
-	    return "user/user/add";
+	String add(Model model){
+		Map<String,Object> map=new HashMap<>();
+		List<RoleDO> roles=roleService.list(map);
+		model.addAttribute("roles",roles);
+		for (RoleDO role : roles) {
+			System.out.println(role.getName());
+		}
+		return "user/user/add";
 	}
 
 	@GetMapping("/edit/{userId}")
 	@RequiresPermissions("user:user:edit")
 	String edit(@PathVariable("userId") Integer userId,Model model){
 		UserDO user = userService.get(userId);
+		List<Integer> roleIds = userRoleService.selectRoleIdByUserId(userId);
+		List<RoleDO> roles=roleService.list(new HashMap<>());
 		model.addAttribute("user", user);
-	    return "user/user/edit";
+		model.addAttribute("roles", roles);
+		model.addAttribute("roleIds", roleIds);
+		return "user/user/edit";
 	}
-	
+
 	/**
 	 * 保存
 	 */
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("user:user:add")
-	public R save( UserDO user){
+	public R save(UserDO user){
+		for (Integer integer : user.getRoleIds()) {
+			System.out.println(integer+"--------------------");
+		}
+		user.setCreatetime(new Date());
+		System.out.println(user.getCreatetime());
 		if(userService.save(user)>0){
 			return R.ok();
 		}
@@ -89,7 +115,7 @@ public class UserController {
 		userService.update(user);
 		return R.ok();
 	}
-	
+
 	/**
 	 * 删除
 	 */
@@ -98,11 +124,11 @@ public class UserController {
 	@RequiresPermissions("user:user:remove")
 	public R remove( Integer userId){
 		if(userService.remove(userId)>0){
-		return R.ok();
+			return R.ok();
 		}
 		return R.error();
 	}
-	
+
 	/**
 	 * 删除
 	 */
@@ -113,5 +139,20 @@ public class UserController {
 		userService.batchRemove(userIds);
 		return R.ok();
 	}
-	
+
+	@PostMapping("/selectByUsername")
+	@ResponseBody
+	public boolean selectByUsername(@RequestParam Map<String, Object> params){
+		String username= (String) params.get("username");
+		System.out.println(username+"----------------");
+		List<UserDO> users = userService.selectByUsername(username);
+		System.out.println(users.size());
+		int size=users.size();
+		if(size<=0){
+			return true;
+		}
+		return false;
+	}
+
+
 }

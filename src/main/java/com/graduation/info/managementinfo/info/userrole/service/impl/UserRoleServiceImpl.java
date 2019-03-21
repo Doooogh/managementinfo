@@ -51,5 +51,10 @@ public class UserRoleServiceImpl implements UserRoleService {
 	public int batchRemove(Integer[] ids){
 		return userRoleDao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public List<Integer> selectRoleIdByUserId(Integer userId) {
+		return userRoleDao.selectRoleIdByUserId(userId);
+	}
+
 }

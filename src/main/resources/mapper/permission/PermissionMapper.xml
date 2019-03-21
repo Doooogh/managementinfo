@@ -104,4 +104,13 @@
 		</foreach>
 	</delete>
 
+	<select id="selectByRoles" resultType="com.graduation.info.managementinfo.info.permission.domain.PermissionDO">
+		select `id`,`parent_id`,`name`,`url`,`sort`,`permission`,`type`,`img`,`createtime`,`updatetime` from permission where `id` in
+		select per_id from role_per where role_id in
+		<foreach item="item" index="index" collection="list"
+				 separator=",">
+			item
+		</foreach>
+	</select>
+
 </mapper>

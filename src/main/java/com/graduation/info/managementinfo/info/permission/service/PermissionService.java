@@ -1,5 +1,6 @@
 package com.graduation.info.managementinfo.info.permission.service;
 
+import com.graduation.info.managementinfo.info.common.entity.Tree;
 import com.graduation.info.managementinfo.info.permission.domain.PermissionDO;
 
 import java.util.List;
@@ -27,4 +28,12 @@ public interface PermissionService {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+	void  recursion(Integer id);
+
+	Tree<PermissionDO> getTree(Integer roleId);
+
+	Tree<PermissionDO> getTree();
+
+	Tree<PermissionDO> getTreeByUserId(Integer userId);
 }

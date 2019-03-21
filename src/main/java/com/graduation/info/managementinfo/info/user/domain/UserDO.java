@@ -2,7 +2,7 @@ package com.graduation.info.managementinfo.info.user.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import java.util.List;
 
 
 /**
@@ -35,6 +35,16 @@ public class UserDO implements Serializable {
 	private Date createtime;
 	//修改时间
 	private Date updatetime;
+
+	private List<Integer> roleIds;
+
+	public List<Integer> getRoleIds() {
+		return roleIds;
+	}
+
+	public void setRoleIds(List<Integer> roleIds) {
+		this.roleIds = roleIds;
+	}
 
 	/**
 	 * 设置：id

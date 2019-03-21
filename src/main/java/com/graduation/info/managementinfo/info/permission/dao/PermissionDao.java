@@ -29,4 +29,6 @@ public interface PermissionDao {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+	List<PermissionDO> selectByRoles(List<Integer> roles);
 }

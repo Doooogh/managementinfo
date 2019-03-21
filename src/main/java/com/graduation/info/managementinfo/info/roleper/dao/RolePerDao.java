@@ -29,4 +29,12 @@ public interface RolePerDao {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+	List<Integer> listPerIdByRoleId(Integer roleId);
+
+	int deletePerByRoleId(Integer roleId);
+
+	int batchSave(List<RolePerDO> rolePers);
+
+	List<Integer>selectPerIdByRoleIds(List<Integer> roles);
 }

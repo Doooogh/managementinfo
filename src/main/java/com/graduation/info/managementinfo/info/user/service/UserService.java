@@ -1,5 +1,6 @@
 package com.graduation.info.managementinfo.info.user.service;
 
+import com.graduation.info.managementinfo.info.common.entity.Tree;
 import com.graduation.info.managementinfo.info.permission.domain.PermissionDO;
 import com.graduation.info.managementinfo.info.user.domain.UserDO;
 
@@ -39,4 +40,6 @@ public interface UserService {
 	Set<String> getPermissions(String username);
 
 	Set<PermissionDO> getPermissionsByUserId(Integer userId);
+
+	List<Tree<PermissionDO>> getTree(Set<PermissionDO> permissions);
 }

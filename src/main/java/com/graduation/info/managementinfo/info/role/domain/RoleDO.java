@@ -2,7 +2,7 @@ package com.graduation.info.managementinfo.info.role.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import java.util.List;
 
 
 /**
@@ -21,10 +21,21 @@ public class RoleDO implements Serializable {
 	private String name;
 	//权限所有
 	private String sign;
+
+	private List<Integer> perIds;
+
 	//创建时间
 	private Date createtime;
 	//修改时间
 	private Date updatetime;
+
+	public List<Integer> getPerIds() {
+		return perIds;
+	}
+
+	public void setPerIds(List<Integer> perIds) {
+		this.perIds = perIds;
+	}
 
 	/**
 	 * 设置：

@@ -27,4 +27,6 @@ public interface UserRoleService {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+	List<Integer> selectRoleIdByUserId(Integer userId);
 }

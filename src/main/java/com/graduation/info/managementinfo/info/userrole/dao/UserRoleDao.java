@@ -29,4 +29,10 @@ public interface UserRoleDao {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+	int batchSave(List<UserRoleDO> userRoles);
+
+	int deleteByUserId(Integer userId);
+
+	List<Integer> selectRoleIdByUserId(Integer userId);
 }

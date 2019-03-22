@@ -22,14 +22,18 @@ public class MenuTree {
         Set<PermissionDO> pers =userDao.getPermissionsByUserId(1);
         List<Tree1<PermissionDO>> trees=new ArrayList<>();
         for (PermissionDO per : pers) {
-            Tree1<PermissionDO> tree=new Tree1<>();
-            tree.setId(per.getId()+"");
-            tree.setParentId(per.getParentId()+"");
-            tree.setTitle(per.getName());
-            tree.setIcon(per.getImg());
-            tree.setHref(per.getUrl());
-            tree.setSpread(false);
-            trees.add(tree);
+            if(per.getType()!=2) {
+                Tree1<PermissionDO> tree = new Tree1<>();
+                tree.setId(per.getId() + "");
+                tree.setParentId(per.getParentId() + "");
+                tree.setTitle(per.getName());
+                tree.setIcon(per.getImg());
+                tree.setHref(per.getUrl());
+                tree.setSpread(false);
+                trees.add(tree);
+            }else {
+                continue;
+            }
         }
         List<Tree1<PermissionDO>> tree1s = BuildTree.buildList1(trees, "0");
 

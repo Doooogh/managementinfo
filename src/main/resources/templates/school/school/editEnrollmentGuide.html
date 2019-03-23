@@ -17,11 +17,10 @@
         <!-- 加载编辑器的容器 -->
         <script id="container" name="content" type="text/plain">
         这里写你的初始化内容
-        <div class="formContent">
 
-        <div>
         </script>
             <input type="hidden" name="id" th:value="${id}">
+            <input type="hidden" id="s_content" th:value="${content}==null?'':${content}">
         <div>
             <input type="button" value="提交" id="formSubmit" />
         </div>

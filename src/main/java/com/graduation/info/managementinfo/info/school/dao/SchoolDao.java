@@ -1,5 +1,6 @@
 package com.graduation.info.managementinfo.info.school.dao;
 
+import com.graduation.info.managementinfo.info.enrollmentguide.domain.EnrollmentGuideDO;
 import com.graduation.info.managementinfo.info.school.domain.SchoolDO;
 
 import java.util.List;
@@ -31,5 +32,8 @@ public interface SchoolDao {
 	int batchRemove(Integer[] ids);
 
 	String getEGuideUrlBySchoolId(Integer Id);
+
+	EnrollmentGuideDO getEGuideBySchool(Integer id);
+
 
 }

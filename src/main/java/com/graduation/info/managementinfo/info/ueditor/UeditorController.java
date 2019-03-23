@@ -60,29 +60,53 @@ public class UeditorController {
     @PostMapping("/postData")
     @ResponseBody
     public R postData(String content,Integer id) {
-            R r=null;
-            try {
-                r = FileUtil.saveEGuide(content,id);
-                System.out.println(r.get("msg"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if((Integer)(r.get("code"))!=0){
-                return R.error();
+             R r=null;
+             String url=null;
+            EnrollmentGuideDO eGuide= schoolService.getEGuideBySchool(id);
+            if(eGuide!=null) {
+                url = eGuide.getUrl();
+                if(StringUtils.isNotBlank(url)){
+                    FileUtil.deleteFile(url);
+                    try {
+                        r=FileUtil.saveEGuide(content,id);
+                        EnrollmentGuideDO enrollmentGuide=new EnrollmentGuideDO();
+                        Integer eId=eGuide.getId();
+                        enrollmentGuide.setId(eId);
+                        enrollmentGuide.setUrl((String)(r.get("msg")));
+                        int a=  enrollmentGuideService.update(enrollmentGuide);
+                        if(a>0){
+                            return R.ok();
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }else{
-                EnrollmentGuideDO enrollmentGuide=new EnrollmentGuideDO();
-                enrollmentGuide.setUrl((String)(r.get("msg")));
-                enrollmentGuide.setCreatetime(new Date());
-                int a=  enrollmentGuideService.save(enrollmentGuide);
-                Integer eId=enrollmentGuide.getId();
-                ScEDO sc=new ScEDO();
-                sc.setScId(id);
-                sc.setEId(eId);
-                int b= scEService.save(sc);
-                if(a>0&&b>0){
-                    return R.ok();
+                try {
+                    r = FileUtil.saveEGuide(content,id);
+                    System.out.println(r.get("msg"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if((Integer)(r.get("code"))!=0){
+                    return R.error();
+                }else{
+                    EnrollmentGuideDO enrollmentGuide=new EnrollmentGuideDO();
+                    enrollmentGuide.setUrl((String)(r.get("msg")));
+                    enrollmentGuide.setCreatetime(new Date());
+                    int a=  enrollmentGuideService.save(enrollmentGuide);
+                    Integer eId=enrollmentGuide.getId();
+                    ScEDO sc=new ScEDO();
+                    sc.setScId(id);
+                    sc.setEId(eId);
+                    int b= scEService.save(sc);
+                    if(a>0&&b>0){
+                        return R.ok();
+                    }
                 }
             }
+
         return R.error();
     }
 

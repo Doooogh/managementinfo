@@ -1,5 +1,6 @@
 package com.graduation.info.managementinfo.info.school.service;
 
+import com.graduation.info.managementinfo.info.enrollmentguide.domain.EnrollmentGuideDO;
 import com.graduation.info.managementinfo.info.school.domain.SchoolDO;
 import io.swagger.models.auth.In;
 
@@ -30,4 +31,6 @@ public interface SchoolService {
 	int batchRemove(Integer[] ids);
 
 	String getEGuideUrlBySchoolId(Integer id);
+
+	EnrollmentGuideDO getEGuideBySchool(Integer id);
 }

@@ -1,9 +1,12 @@
 package com.graduation.info.managementinfo.info.school.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import com.graduation.info.managementinfo.info.enrollmentguide.domain.EnrollmentGuideDO;
 import com.graduation.info.managementinfo.info.enrollmentguide.service.EnrollmentGuideService;
+import com.graduation.info.managementinfo.system.utils.FileUtil;
 import com.graduation.info.managementinfo.system.utils.PageUtils;
 import com.graduation.info.managementinfo.system.utils.Query;
 import com.graduation.info.managementinfo.system.utils.R;
@@ -118,24 +121,42 @@ public class SchoolController {
 	}
 
 	@GetMapping("/lookEnrollmentGuide/{id}")
-	public String lookEnrollmentGuide(@PathVariable("id") Integer id){
-
+	public String lookEnrollmentGuide(@PathVariable("id") Integer id,Model model){
+		model.addAttribute("id",id);
 		return "school/school/enrollmentGuide";
+	}
+
+	@GetMapping("/getEnrollmentGuide")
+	@ResponseBody
+	public String getEnrollmentGuide(Integer id){
+		EnrollmentGuideDO enrollmentGuide=schoolService.getEGuideBySchool(id);
+		if(enrollmentGuide==null){
+			return "没有进行编辑";
+		}else{
+			String url=enrollmentGuide.getUrl();
+			try {
+				String content=FileUtil.getEGuide(url);
+				return content;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return "";
 	}
 
 	@GetMapping("/editEnrollmentGuide/{id}")
 	public String editEnrollmentGuide(@PathVariable("id") Integer id,Model model){
 		String url=schoolService.getEGuideUrlBySchoolId(id);
 		if(StringUtils.isNotBlank(url)){
-
+			try {
+				String content=FileUtil.getEGuide(url);
+				model.addAttribute("content",content);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		model.addAttribute("id",id);
 		return "school/school/editEnrollmentGuide";
-	}
-
-	@GetMapping("/test")
-	public String test(){
-		return "test";
 	}
 
 

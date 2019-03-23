@@ -1,5 +1,6 @@
 package com.graduation.info.managementinfo.info.school.service.impl;
 
+import com.graduation.info.managementinfo.info.enrollmentguide.domain.EnrollmentGuideDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +57,11 @@ public class SchoolServiceImpl implements SchoolService {
 	public String getEGuideUrlBySchoolId(Integer id) {
 		return schoolDao.getEGuideUrlBySchoolId(id);
 	}
+
+	@Override
+	public EnrollmentGuideDO getEGuideBySchool(Integer id) {
+		return schoolDao.getEGuideBySchool(id);
+	}
+
 
 }

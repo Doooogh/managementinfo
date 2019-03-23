@@ -1,17 +1,15 @@
 $(function () {
+    setContent();
     $("#formSubmit").click(function () {
         postData();
         }
     );
     function postData() {
-        alert("提交数据");
         $.ajax({
             type:"POST",
             url:"/uedito/postData",
             data: $("#form_content").serialize(),
             success:function (data) {
-                alert(data.msg);
-                layer.msg("操作成功");
                 var tid= $('.layui-tab-title .layui-this', window.parent.document).attr("lay-id");
                 if(data.code==0){
                     layui.use('element', function(){
@@ -28,14 +26,7 @@ $(function () {
                         };
 
                         active.tabDelete();
-                        //Hash地址的定位
-                        var layid = location.hash.replace(/^#test=/, '');
-                        element.tabChange('test', layid);
-
-                        element.on('tab(test)', function(elem){
-                            location.hash = 'test='+ $(this).attr('lay-id');
-                        });
-
+                        layer.msg(data.msg);
                     });
                 }
             },
@@ -45,4 +36,15 @@ $(function () {
         });
 
     }
+
+  
 });
+function setContent() {
+    var str=$("#s_content").val();
+    if(str!=null||str!=""){
+        ue.ready(function() {
+            //设置编辑器的内容
+            ue.setContent(str);
+        });
+    }
+}

@@ -94,4 +94,8 @@
 		</foreach>
 	</delete>
 
+	<select id="getEGuideUrlBySchoolId" resultType="string">
+		select url from enrollment_guide where id =(select e_id from sc_e where sc_id=#{id})
+	</select>
+
 </mapper>

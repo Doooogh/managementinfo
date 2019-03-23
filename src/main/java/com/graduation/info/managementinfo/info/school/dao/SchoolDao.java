@@ -29,4 +29,7 @@ public interface SchoolDao {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+	String getEGuideUrlBySchoolId(Integer Id);
+
 }

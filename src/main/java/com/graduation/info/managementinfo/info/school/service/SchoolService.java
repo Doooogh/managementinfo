@@ -1,6 +1,7 @@
 package com.graduation.info.managementinfo.info.school.service;
 
 import com.graduation.info.managementinfo.info.school.domain.SchoolDO;
+import io.swagger.models.auth.In;
 
 import java.util.List;
 import java.util.Map;
@@ -27,4 +28,6 @@ public interface SchoolService {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+	String getEGuideUrlBySchoolId(Integer id);
 }

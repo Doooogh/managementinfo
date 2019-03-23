@@ -3,9 +3,11 @@ package com.graduation.info.managementinfo.info.school.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.graduation.info.managementinfo.info.enrollmentguide.service.EnrollmentGuideService;
 import com.graduation.info.managementinfo.system.utils.PageUtils;
 import com.graduation.info.managementinfo.system.utils.Query;
 import com.graduation.info.managementinfo.system.utils.R;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -13,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,6 +35,8 @@ import com.graduation.info.managementinfo.info.school.service.SchoolService;
 public class SchoolController {
 	@Autowired
 	private SchoolService schoolService;
+	@Autowired
+	private EnrollmentGuideService enrollmentGuideService;
 	
 	@GetMapping()
 	@RequiresPermissions("school:school:school")
@@ -116,8 +119,25 @@ public class SchoolController {
 
 	@GetMapping("/lookEnrollmentGuide/{id}")
 	public String lookEnrollmentGuide(@PathVariable("id") Integer id){
+
 		return "school/school/enrollmentGuide";
 	}
+
+	@GetMapping("/editEnrollmentGuide/{id}")
+	public String editEnrollmentGuide(@PathVariable("id") Integer id,Model model){
+		String url=schoolService.getEGuideUrlBySchoolId(id);
+		if(StringUtils.isNotBlank(url)){
+
+		}
+		model.addAttribute("id",id);
+		return "school/school/editEnrollmentGuide";
+	}
+
+	@GetMapping("/test")
+	public String test(){
+		return "test";
+	}
+
 
 
 }

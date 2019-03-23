@@ -51,5 +51,10 @@ public class SchoolServiceImpl implements SchoolService {
 	public int batchRemove(Integer[] ids){
 		return schoolDao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public String getEGuideUrlBySchoolId(Integer id) {
+		return schoolDao.getEGuideUrlBySchoolId(id);
+	}
+
 }

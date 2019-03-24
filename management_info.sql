@@ -10,10 +10,80 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2019-03-20 18:47:11
+Date: 2019-03-25 01:35:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for course
+-- ----------------------------
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE `course` (
+  `id` int(16) NOT NULL AUTO_INCREMENT COMMENT '课程id',
+  `name` varchar(16) DEFAULT NULL COMMENT '名字',
+  `url` varchar(128) DEFAULT NULL COMMENT '课程地址',
+  `size` varchar(16) DEFAULT NULL COMMENT '课程大小',
+  `oioioi` varchar(255) DEFAULT NULL COMMENT '备用字段',
+  `ioioio` varchar(255) DEFAULT NULL COMMENT '备用字段',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of course
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for enrollment_guide
+-- ----------------------------
+DROP TABLE IF EXISTS `enrollment_guide`;
+CREATE TABLE `enrollment_guide` (
+  `id` int(16) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `url` varchar(255) DEFAULT NULL COMMENT '文件路径',
+  `createtime` timestamp NULL DEFAULT NULL,
+  `updatetime` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `pooppoo` varchar(255) DEFAULT NULL COMMENT '备用字段',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of enrollment_guide
+-- ----------------------------
+INSERT INTO `enrollment_guide` VALUES ('16', 'f:\\file\\eguide\\30883497-235b-495d-9bbf-8ab2d099ac562.txt', '2019-03-24 01:21:30', null, null);
+
+-- ----------------------------
+-- Table structure for grade_mark
+-- ----------------------------
+DROP TABLE IF EXISTS `grade_mark`;
+CREATE TABLE `grade_mark` (
+  `id` int(16) NOT NULL AUTO_INCREMENT,
+  `sc_id` int(16) DEFAULT NULL COMMENT '学校id',
+  `m_id` int(16) DEFAULT NULL COMMENT '专业id',
+  `grade` int(16) DEFAULT NULL COMMENT '分数线',
+  `klklkl` varchar(16) DEFAULT NULL COMMENT '备用字段',
+  `jljljl` varchar(16) DEFAULT NULL COMMENT '备用字段',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of grade_mark
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for major
+-- ----------------------------
+DROP TABLE IF EXISTS `major`;
+CREATE TABLE `major` (
+  `id` int(16) NOT NULL AUTO_INCREMENT,
+  `name` varchar(16) DEFAULT NULL COMMENT '专业名字',
+  `cdcdcd` varchar(16) DEFAULT NULL COMMENT '备用字段',
+  `dedede` varchar(16) DEFAULT NULL COMMENT '备用字段',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of major
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for permission
@@ -31,11 +101,17 @@ CREATE TABLE `permission` (
   `createtime` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   `updatetime` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of permission
 -- ----------------------------
+INSERT INTO `permission` VALUES ('5', '0', '系统管理', '', '', '1', '0', '&#xe716;', null, '2019-03-21 16:50:59');
+INSERT INTO `permission` VALUES ('6', '5', '用户管理', '/user/user', 'user:user', '1', '1', null, null, null);
+INSERT INTO `permission` VALUES ('7', '5', '角色管理', '/role/role', 'role:role', '1', '1', null, null, null);
+INSERT INTO `permission` VALUES ('8', '5', '权限管理', '/permission/permission', 'permission:permission', null, '1', null, null, '2019-03-21 22:58:15');
+INSERT INTO `permission` VALUES ('58', '0', '学校管理', '', '', null, '0', '&#xe62a;', null, '2019-03-21 22:59:38');
+INSERT INTO `permission` VALUES ('59', '58', '学校管理', '/school/school', 'school:school', null, '1', '', null, '2019-03-21 22:59:37');
 
 -- ----------------------------
 -- Table structure for role
@@ -48,14 +124,12 @@ CREATE TABLE `role` (
   `createtime` datetime DEFAULT NULL COMMENT '创建时间',
   `updatetime` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES ('15', '管理员', '管理员', null, null);
-INSERT INTO `role` VALUES ('16', '中介', '中介', null, null);
-INSERT INTO `role` VALUES ('17', '管理员测试', '管理员', null, null);
+INSERT INTO `role` VALUES ('1', '管理员', '管理员', null, '2019-03-21 09:33:59');
 
 -- ----------------------------
 -- Table structure for role_per
@@ -66,87 +140,129 @@ CREATE TABLE `role_per` (
   `role_id` int(16) DEFAULT NULL,
   `per_id` int(16) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=263 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=278 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of role_per
 -- ----------------------------
-INSERT INTO `role_per` VALUES ('134', '17', '49');
-INSERT INTO `role_per` VALUES ('135', '17', '48');
-INSERT INTO `role_per` VALUES ('136', '17', '47');
-INSERT INTO `role_per` VALUES ('137', '17', '44');
-INSERT INTO `role_per` VALUES ('138', '17', '43');
-INSERT INTO `role_per` VALUES ('139', '17', '42');
-INSERT INTO `role_per` VALUES ('140', '17', '38');
-INSERT INTO `role_per` VALUES ('141', '17', '37');
-INSERT INTO `role_per` VALUES ('142', '17', '36');
-INSERT INTO `role_per` VALUES ('143', '17', '34');
-INSERT INTO `role_per` VALUES ('144', '17', '32');
-INSERT INTO `role_per` VALUES ('145', '17', '31');
-INSERT INTO `role_per` VALUES ('146', '17', '30');
-INSERT INTO `role_per` VALUES ('147', '17', '29');
-INSERT INTO `role_per` VALUES ('148', '17', '28');
-INSERT INTO `role_per` VALUES ('149', '17', '27');
-INSERT INTO `role_per` VALUES ('150', '17', '23');
-INSERT INTO `role_per` VALUES ('151', '17', '22');
-INSERT INTO `role_per` VALUES ('152', '17', '21');
-INSERT INTO `role_per` VALUES ('153', '17', '20');
-INSERT INTO `role_per` VALUES ('154', '17', '18');
-INSERT INTO `role_per` VALUES ('155', '17', '45');
-INSERT INTO `role_per` VALUES ('156', '17', '41');
-INSERT INTO `role_per` VALUES ('157', '17', '35');
-INSERT INTO `role_per` VALUES ('158', '17', '33');
-INSERT INTO `role_per` VALUES ('159', '17', '26');
-INSERT INTO `role_per` VALUES ('160', '17', '25');
-INSERT INTO `role_per` VALUES ('161', '17', '24');
-INSERT INTO `role_per` VALUES ('162', '17', '19');
-INSERT INTO `role_per` VALUES ('163', '17', '17');
-INSERT INTO `role_per` VALUES ('164', '17', '46');
-INSERT INTO `role_per` VALUES ('165', '17', '52');
-INSERT INTO `role_per` VALUES ('166', '17', '51');
-INSERT INTO `role_per` VALUES ('167', '17', '50');
-INSERT INTO `role_per` VALUES ('168', '17', '39');
-INSERT INTO `role_per` VALUES ('169', '17', '-1');
-INSERT INTO `role_per` VALUES ('206', '15', '52');
-INSERT INTO `role_per` VALUES ('207', '15', '51');
-INSERT INTO `role_per` VALUES ('208', '15', '50');
-INSERT INTO `role_per` VALUES ('209', '15', '49');
-INSERT INTO `role_per` VALUES ('210', '15', '48');
-INSERT INTO `role_per` VALUES ('211', '15', '47');
-INSERT INTO `role_per` VALUES ('212', '15', '44');
-INSERT INTO `role_per` VALUES ('213', '15', '43');
-INSERT INTO `role_per` VALUES ('214', '15', '42');
-INSERT INTO `role_per` VALUES ('215', '15', '38');
-INSERT INTO `role_per` VALUES ('216', '15', '37');
-INSERT INTO `role_per` VALUES ('217', '15', '36');
-INSERT INTO `role_per` VALUES ('218', '15', '34');
-INSERT INTO `role_per` VALUES ('219', '15', '32');
-INSERT INTO `role_per` VALUES ('220', '15', '31');
-INSERT INTO `role_per` VALUES ('221', '15', '30');
-INSERT INTO `role_per` VALUES ('222', '15', '29');
-INSERT INTO `role_per` VALUES ('223', '15', '28');
-INSERT INTO `role_per` VALUES ('224', '15', '27');
-INSERT INTO `role_per` VALUES ('225', '15', '23');
-INSERT INTO `role_per` VALUES ('226', '15', '22');
-INSERT INTO `role_per` VALUES ('227', '15', '21');
-INSERT INTO `role_per` VALUES ('228', '15', '20');
-INSERT INTO `role_per` VALUES ('229', '15', '18');
-INSERT INTO `role_per` VALUES ('230', '15', '46');
-INSERT INTO `role_per` VALUES ('231', '15', '41');
-INSERT INTO `role_per` VALUES ('232', '15', '35');
-INSERT INTO `role_per` VALUES ('233', '15', '33');
-INSERT INTO `role_per` VALUES ('234', '15', '26');
-INSERT INTO `role_per` VALUES ('235', '15', '25');
-INSERT INTO `role_per` VALUES ('236', '15', '24');
-INSERT INTO `role_per` VALUES ('237', '15', '19');
-INSERT INTO `role_per` VALUES ('238', '15', '17');
-INSERT INTO `role_per` VALUES ('239', '15', '54');
-INSERT INTO `role_per` VALUES ('240', '15', '45');
-INSERT INTO `role_per` VALUES ('241', '15', '39');
-INSERT INTO `role_per` VALUES ('242', '15', '-1');
-INSERT INTO `role_per` VALUES ('260', '16', '18');
-INSERT INTO `role_per` VALUES ('261', '16', '17');
-INSERT INTO `role_per` VALUES ('262', '16', '-1');
+INSERT INTO `role_per` VALUES ('2', '2', '1');
+INSERT INTO `role_per` VALUES ('3', '2', '2');
+INSERT INTO `role_per` VALUES ('4', '2', '3');
+INSERT INTO `role_per` VALUES ('5', '2', '5');
+INSERT INTO `role_per` VALUES ('6', '2', '6');
+INSERT INTO `role_per` VALUES ('7', '2', '7');
+INSERT INTO `role_per` VALUES ('8', '2', '8');
+INSERT INTO `role_per` VALUES ('268', '18', '8');
+INSERT INTO `role_per` VALUES ('269', '18', '7');
+INSERT INTO `role_per` VALUES ('270', '18', '5');
+INSERT INTO `role_per` VALUES ('271', '1', '-1');
+INSERT INTO `role_per` VALUES ('272', '1', '59');
+INSERT INTO `role_per` VALUES ('273', '1', '8');
+INSERT INTO `role_per` VALUES ('274', '1', '7');
+INSERT INTO `role_per` VALUES ('275', '1', '6');
+INSERT INTO `role_per` VALUES ('276', '1', '58');
+INSERT INTO `role_per` VALUES ('277', '1', '5');
+
+-- ----------------------------
+-- Table structure for school
+-- ----------------------------
+DROP TABLE IF EXISTS `school`;
+CREATE TABLE `school` (
+  `id` int(16) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(16) DEFAULT NULL COMMENT '学校名字',
+  `enrollment_guide` varchar(255) DEFAULT NULL COMMENT '招生简章',
+  `item_bank` varchar(255) DEFAULT NULL COMMENT '试题库',
+  `aaaa` varchar(32) DEFAULT NULL COMMENT '备用字段1',
+  `bbbb` varchar(255) DEFAULT NULL COMMENT '备用字段2',
+  `cccc` varchar(255) DEFAULT NULL COMMENT '备用字段1',
+  `dddd` varchar(255) DEFAULT NULL COMMENT '备用字段',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of school
+-- ----------------------------
+INSERT INTO `school` VALUES ('2', '复旦大学', '试试', '嘎嘎', '', '', '', '');
+INSERT INTO `school` VALUES ('3', '安抚', '', '', '', '', '', '');
+
+-- ----------------------------
+-- Table structure for sc_course
+-- ----------------------------
+DROP TABLE IF EXISTS `sc_course`;
+CREATE TABLE `sc_course` (
+  `id` int(16) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `sc_id` int(16) DEFAULT NULL COMMENT '学校id',
+  `m_id` int(16) DEFAULT NULL COMMENT '专业id',
+  `ghghgh` varchar(255) DEFAULT NULL COMMENT '备用字段',
+  `hghghg` varchar(255) DEFAULT NULL COMMENT '备用字段',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sc_course
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sc_e
+-- ----------------------------
+DROP TABLE IF EXISTS `sc_e`;
+CREATE TABLE `sc_e` (
+  `id` int(16) NOT NULL AUTO_INCREMENT COMMENT '学校id',
+  `sc_id` int(16) DEFAULT NULL,
+  `e_id` int(16) DEFAULT NULL COMMENT '招生简章id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sc_e
+-- ----------------------------
+INSERT INTO `sc_e` VALUES ('15', '2', '16');
+
+-- ----------------------------
+-- Table structure for sc_sub
+-- ----------------------------
+DROP TABLE IF EXISTS `sc_sub`;
+CREATE TABLE `sc_sub` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sc_id` int(16) DEFAULT NULL COMMENT '学校id',
+  `sub_id` int(16) DEFAULT NULL COMMENT '学科id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sc_sub
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for subject
+-- ----------------------------
+DROP TABLE IF EXISTS `subject`;
+CREATE TABLE `subject` (
+  `id` int(16) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(16) DEFAULT NULL,
+  `ababab` varchar(255) DEFAULT NULL COMMENT '备用字段',
+  `bcbcbc` varchar(255) DEFAULT NULL COMMENT '备用字段',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of subject
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sub_m
+-- ----------------------------
+DROP TABLE IF EXISTS `sub_m`;
+CREATE TABLE `sub_m` (
+  `id` int(16) NOT NULL,
+  `sub_id` int(16) DEFAULT NULL COMMENT '学科id',
+  `m_id` int(16) DEFAULT NULL COMMENT '专业id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sub_m
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for user
@@ -164,13 +280,12 @@ CREATE TABLE `user` (
   `createtime` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   `updatetime` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('28', '系统管理员', 'admin', 'admin', '13283354149', '男', '1122', '1', '2019-03-15 10:24:33', null);
-INSERT INTO `user` VALUES ('29', '测试人员', 'testman', '123', '13283354149', '男', '22', '1', '2019-03-18 16:55:20', '2019-03-19 12:23:47');
+INSERT INTO `user` VALUES ('1', '系统管理员', 'admin', 'admin', '13283354149', '男', '1122', '1', '2019-03-15 10:24:33', '2019-03-21 09:34:11');
 
 -- ----------------------------
 -- Table structure for user_role
@@ -181,10 +296,11 @@ CREATE TABLE `user_role` (
   `user_id` int(16) DEFAULT NULL,
   `role_id` int(16) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
-INSERT INTO `user_role` VALUES ('24', '28', '15');
-INSERT INTO `user_role` VALUES ('26', '29', '16');
+INSERT INTO `user_role` VALUES ('2', '1', '2');
+INSERT INTO `user_role` VALUES ('27', '57', '1');
+INSERT INTO `user_role` VALUES ('28', '1', '1');

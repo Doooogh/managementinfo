@@ -7,6 +7,7 @@ layui.config({
 layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	var form = layui.form,
 		element = layui.element;
+		window.e=element;
 		$ = layui.$;
     	layer = parent.layer === undefined ? layui.layer : top.layer;
 		tab = layui.bodyTab({

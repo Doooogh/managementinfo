@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.info.managementinfo.info.enrollmentguide.dao.EnrollmentGuideDao">
+
+	<select id="get" resultType="com.graduation.info.managementinfo.info.enrollmentguide.domain.EnrollmentGuideDO">
+		select `id`,`url`,`createtime`,`updatetime`,`pooppoo` from enrollment_guide where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.graduation.info.managementinfo.info.enrollmentguide.domain.EnrollmentGuideDO">
+		select `id`,`url`,`createtime`,`updatetime`,`pooppoo` from enrollment_guide
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+		  		  <if test="pooppoo != null and pooppoo != ''"> and pooppoo = #{pooppoo} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from enrollment_guide
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+		  		  <if test="pooppoo != null and pooppoo != ''"> and pooppoo = #{pooppoo} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.graduation.info.managementinfo.info.enrollmentguide.domain.EnrollmentGuideDO" useGeneratedKeys="true" keyProperty="id">
+		insert into enrollment_guide
+		(
+			`url`,
+			`createtime`,
+			`pooppoo`
+		)
+		values
+		(
+			#{url},
+			#{createtime},
+			#{pooppoo}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.graduation.info.managementinfo.info.enrollmentguide.domain.EnrollmentGuideDO">
+		update enrollment_guide 
+		<set>
+			<if test="url != null">`url` = #{url}, </if>
+			<if test="updatetime != null">`updatetime` = #{updatetime}, </if>
+			<if test="pooppoo != null">`pooppoo` = #{pooppoo}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from enrollment_guide where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from enrollment_guide where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

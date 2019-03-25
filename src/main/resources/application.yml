@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /
 
+
+
 spring:
   datasource:
     username: root
@@ -13,6 +15,10 @@ spring:
   thymeleaf:
       mode: LEGACYHTML5
       cache: false
+  servlet:
+    multipart:
+      max-file-size:  194756140
+      max-request-size: 194756140
 mybatis:
   configuration:
     map-underscore-to-camel-case: true

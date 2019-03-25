@@ -59,7 +59,8 @@ function load() {
 									field : 'id',
 									title : '招生简章' ,
 									formatter:function (value,row,index) {
-										var str="<a style=\"text-decoration:none;\" onclick=\"lookEnrollmentGuide("+value+")\">查看</a>";
+										var str="<a style=\"text-decoration: none\" onclick=\"lookEnrollmentGuide("+value+")\">查看</a>\n" +
+                                            "<a style=\"text-decoration: none;margin-left: 5px\" onclick=\"editEnrollmentGuide("+value+")\">编辑</a>";
 										return str;
                                     }
 								},
@@ -67,7 +68,7 @@ function load() {
 									field : 'id',
 									title : '试题库' ,
 									formatter:function (value,row,index) {
-										var str="<a style=\"text-decoration:none;\" onclick=\"lookEnrollmentGuide("+value+")\">查看</a>";
+										var str="<a style=\"text-decoration:none;\" onclick=\"lookTestQuestion("+value+")\">查看</a>";
 										return str;
 									}
 								},
@@ -191,12 +192,143 @@ function batchRemove() {
 
 //查看招生简章
 function lookEnrollmentGuide(id) {
-    layer.open({
-        type : 2,
-        title : '招生简章',
-        maxmin : true,
-        shadeClose : false, // 点击遮罩关闭层
-        area : [ '800px', '520px' ],
-        content : prefix + '/lookEnrollmentGuide/'+id // iframe的url
+    var houseTitle='招生简章';
+    layui.use('element', function(){
+        var $ = layui.jquery
+            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+        element=parent.window.e;
+        var tid='newTab'+new Date().getTime();
+        //触发事件
+        var active = {
+            tabAdd: function(){
+                $('#top_tabs_box', window.parent.document).attr("lay-allowClose","true");
+                //新增一个Tab项
+                element.tabAdd('bodyTab', {
+                    title: houseTitle //用于演示
+                    ,content:"<iframe src='" + "/school/school/lookEnrollmentGuide/"+id+"' ></iframe>"
+                    ,id: tid //实际使用一般是规定好的id，这里以时间戳模拟下
+                });
+
+            }
+            ,tabDelete: function(othis){
+                //删除指定Tab项
+                element.tabDelete('bodyTab', tid); //删除：“商品管理”
+
+
+                othis.addClass('layui-btn-disabled');
+            }
+            ,tabChange: function(){
+                //切换到指定Tab项
+                element.tabChange('bodyTab',tid); //切换到：用户管理
+            }
+        };
+
+
+        active.tabAdd();
+        active.tabChange();
+
+
+        //Hash地址的定位
+        var layid = location.hash.replace(/^#test=/, '');
+        element.tabChange('test', layid);
+
+        element.on('tab(test)', function(elem){
+            location.hash = 'test='+ $(this).attr('lay-id');
+        });
+
+    });
+}
+function editEnrollmentGuide(id) {
+    var title='招生简章编辑';
+    layui.use('element', function(){
+        var $ = layui.jquery
+            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+        element=parent.window.e;
+        var tid='newTab'+new Date().getTime();
+        //触发事件
+        var active = {
+            tabAdd: function(){
+                $('#top_tabs_box', window.parent.document).attr("lay-allowClose","true");
+                //新增一个Tab项
+                element.tabAdd('bodyTab', {
+                    title: title //用于演示
+                    ,content:"<iframe src='" + "/school/school/editEnrollmentGuide/"+id+"' ></iframe>"
+                    ,id: tid //实际使用一般是规定好的id，这里以时间戳模拟下
+                });
+
+            }
+            ,tabDelete: function(othis){
+                //删除指定Tab项
+                element.tabDelete('bodyTab', tid); //删除：“商品管理”
+
+
+                othis.addClass('layui-btn-disabled');
+            }
+            ,tabChange: function(){
+                //切换到指定Tab项
+                element.tabChange('bodyTab',tid); //切换到：用户管理
+            }
+        };
+
+
+        active.tabAdd();
+        active.tabChange();
+
+
+        //Hash地址的定位
+        var layid = location.hash.replace(/^#test=/, '');
+        element.tabChange('test', layid);
+
+        element.on('tab(test)', function(elem){
+            location.hash = 'test='+ $(this).attr('lay-id');
+        });
+
+    });
+}
+function lookTestQuestion(id) {
+    var title='试题库';
+    layui.use('element', function(){
+        var $ = layui.jquery
+            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+        element=parent.window.e;
+        var tid='newTab'+new Date().getTime();
+        //触发事件
+        var active = {
+            tabAdd: function(){
+                $('#top_tabs_box', window.parent.document).attr("lay-allowClose","true");
+                //新增一个Tab项
+                element.tabAdd('bodyTab', {
+                    title: title //用于演示
+                    ,content:"<iframe src='" + "/school/school/lookTestQuestion/"+id+"' ></iframe>"
+                    ,id: tid //实际使用一般是规定好的id，这里以时间戳模拟下
+                });
+
+            }
+            ,tabDelete: function(othis){
+                //删除指定Tab项
+                element.tabDelete('bodyTab', tid); //删除：“商品管理”
+
+
+                othis.addClass('layui-btn-disabled');
+            }
+            ,tabChange: function(){
+                //切换到指定Tab项
+                element.tabChange('bodyTab',tid); //切换到：用户管理
+            }
+        };
+
+
+        active.tabAdd();
+        active.tabChange();
+
+
+        //Hash地址的定位
+        var layid = location.hash.replace(/^#test=/, '');
+        element.tabChange('test', layid);
+
+        element.on('tab(test)', function(elem){
+            location.hash = 'test='+ $(this).attr('lay-id');
+        });
+
     });
 }

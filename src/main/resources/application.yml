@@ -23,7 +23,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
   #    ????????? ??????mybatis??????sql
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/**/*Mapper.xml
   typeAliasesPackage: com.**.domain
 pagehelper:

@@ -171,5 +171,12 @@ public class SchoolController {
 		return "/testquestion/testQuestion/testQuestion";
 	}
 
+	@GetMapping("/lookVideoDatabase/{id}")
+	public String lookVideoDatabase(@PathVariable("id") Integer id,Model model){
+//		List<TestQuestionDO> testQs = testQuestionService.getTestQuestionBySId(id);
+		model.addAttribute("scId",id);
+		return "/videodatabase/videoDatabase/videoDatabase.html";
+	}
+
 
 }

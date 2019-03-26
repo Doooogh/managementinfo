@@ -1,5 +1,8 @@
 package com.graduation.info.managementinfo.info.testquestion.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,8 +27,12 @@ public class TestQuestionDO implements Serializable {
 	//
 	private String size;
 	//创建时间
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") //入参
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss") //出参
 	private Date createtime;
 	//更新时间
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") //入参
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss") //出参
 	private Date updatetime;
 	//备用字段
 	private Integer scId;

@@ -36,7 +36,8 @@ function load() {
 								offset:params.offset,
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
-								scId:scId
+								scId:scId,
+                                tname:$('#searchName').val(),
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -65,19 +66,16 @@ function load() {
 									field : 'createtime', 
 									title : '创建时间' 
 								},
-																{
-									field : 'updatetime', 
-									title : '更新时间' 
-								},
+
 
 																{
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="下载" onclick="edit(\''
-												+ row.id
-												+ '\')"><i class="fa fa-code"></i></a> ';
+										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="下载"  onclick="downloadFile('+row.id+","+"\'"+row.tname+"\'"+')">' +
+											'<i class="fa fa-code"></i></a> ';
+
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.id
 												+ '\')"><i class="fa fa-remove"></i></a> ';
@@ -171,4 +169,8 @@ function batchRemove() {
 	}, function() {
 
 	});
+}
+
+function downloadFile(id,tname) {
+    window.location.href="/testquestion/testQuestion/download?id="+id+"&tname="+tname;
 }

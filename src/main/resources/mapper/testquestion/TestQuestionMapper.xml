@@ -16,8 +16,8 @@
 		  		  <if test="size != null and size != ''"> and size = #{size} </if>
 		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
 		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
-		  		  <if test="sc_id != null and sc_id != ''"> and sc_id = #{scId} </if>
-		  		</where>
+		  		  <if test="scId != null and scId != ''"> and sc_id = #{scId} </if>
+		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -40,7 +40,7 @@
 		  		  <if test="size != null and size != ''"> and size = #{size} </if>
 		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
 		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
-		  		  <if test="sc_id != null and sc_id != ''"> and sc_id = #{scId} </if>
+		  		  <if test="scId != null and scId != ''"> and sc_id = #{scId} </if>
 		  		</where>
 	</select>
 	 
@@ -73,7 +73,7 @@
 			<if test="size != null">`size` = #{size}, </if>
 			<if test="createtime != null">`createtime` = #{createtime}, </if>
 			<if test="updatetime != null">`updatetime` = #{updatetime}, </if>
-			<if test="sc_id != null">`sc_id` = #{scId}</if>
+			<if test="scId != null">`sc_id` = #{scId}</if>
 		</set>
 		where id = #{id}
 	</update>

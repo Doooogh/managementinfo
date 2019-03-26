@@ -175,7 +175,7 @@ public class SchoolController {
 	public String lookVideoDatabase(@PathVariable("id") Integer id,Model model){
 //		List<TestQuestionDO> testQs = testQuestionService.getTestQuestionBySId(id);
 		model.addAttribute("scId",id);
-		return "/videodatabase/videoDatabase/videoDatabase.html";
+		return "/videodatabase/videoDatabase/videoDatabase";
 	}
 
 

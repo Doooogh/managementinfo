@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.info.managementinfo.info.videodatabase.dao.VideoDatabaseDao">
+
+	<select id="get" resultType="com.graduation.info.managementinfo.info.videodatabase.domain.VideoDatabaseDO">
+		select `id`,`vname`,`url`,`size`,`sc_id`,`createtime`,`updatetime`,`hjhjhj` from video_database where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.graduation.info.managementinfo.info.videodatabase.domain.VideoDatabaseDO">
+		select `id`,`vname`,`url`,`size`,`sc_id`,`createtime`,`updatetime`,`hjhjhj` from video_database
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="vname != null and vname != ''"> and vname = #{vname} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="size != null and size != ''"> and size = #{size} </if>
+		  		  <if test="scId != null and scId != ''"> and sc_id = #{scId} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+		  		  <if test="hjhjhj != null and hjhjhj != ''"> and hjhjhj = #{hjhjhj} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from video_database
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="vname != null and vname != ''"> and vname = #{vname} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="size != null and size != ''"> and size = #{size} </if>
+		  		  <if test="scId != null and scId != ''"> and sc_id = #{scId} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+		  		  <if test="hjhjhj != null and hjhjhj != ''"> and hjhjhj = #{hjhjhj} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.graduation.info.managementinfo.info.videodatabase.domain.VideoDatabaseDO" useGeneratedKeys="true" keyProperty="id">
+		insert into video_database
+		(
+			`vname`, 
+			`url`, 
+			`size`, 
+			`sc_id`, 
+			`createtime`, 
+			`updatetime`, 
+			`hjhjhj`
+		)
+		values
+		(
+			#{vname}, 
+			#{url}, 
+			#{size}, 
+			#{scId}, 
+			#{createtime}, 
+			#{updatetime}, 
+			#{hjhjhj}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.graduation.info.managementinfo.info.videodatabase.domain.VideoDatabaseDO">
+		update video_database 
+		<set>
+			<if test="vname != null">`vname` = #{vname}, </if>
+			<if test="url != null">`url` = #{url}, </if>
+			<if test="size != null">`size` = #{size}, </if>
+			<if test="scId != null">`sc_id` = #{scId}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}, </if>
+			<if test="updatetime != null">`updatetime` = #{updatetime}, </if>
+			<if test="hjhjhj != null">`hjhjhj` = #{hjhjhj}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from video_database where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from video_database where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

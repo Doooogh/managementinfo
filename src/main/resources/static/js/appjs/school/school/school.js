@@ -347,7 +347,7 @@ function lookVideoDatabase(id) {
                 //新增一个Tab项
                 element.tabAdd('bodyTab', {
                     title: title //用于演示
-                    ,content:"<iframe src='" + "/school/school/lookTestQuestion/"+id+"' ></iframe>"
+                    ,content:"<iframe src='" + "/school/school/lookVideoDatabase/"+id+"' ></iframe>"
                     ,id: tid //实际使用一般是规定好的id，这里以时间戳模拟下
                 });
 

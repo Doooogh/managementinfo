@@ -59,7 +59,8 @@ public class IndexController {
     @GetMapping("/getTree")
     @ResponseBody
     public MenuItem getTree(){
-        return menuTree.getTreeByUserId(1);
+        UserDO user= (UserDO) ShiroUtils.getSubjct().getSession().getAttribute("user");
+        return menuTree.getTreeByUserId(user.getUserId());
     }
 
     @GetMapping("/main")
@@ -67,20 +68,15 @@ public class IndexController {
         Map<String,Object> map=new HashMap();
         UserDO user= (UserDO) ShiroUtils.getSubjct().getSession().getAttribute("user");
         String username=user.getUsername();
-        List<Integer> roleIds = user.getRoleIds();
-      /*  List<String> roleNames=new ArrayList<>();
-        for (Integer roleId : roleIds) {
-            String roleName=roleService.get(roleId).getName();
-            roleNames.add(roleName);
-        }*/
+
+
         Integer schoolNum=schoolService.count(map);
         Integer testquestionNum = testQuestionService.count(map);
-//        Integer videoNum=videoDatabaseService.count(map);
+        Integer videoNum=videoDatabaseService.count(map);
         model.addAttribute("username",username);
         model.addAttribute("schoolNum",schoolNum);
         model.addAttribute("testquestionNum",testquestionNum);
-//        model.addAttribute("videoNum",videoNum);
-//        model.addAttribute("roleNames",roleNames);
+        model.addAttribute("videoNum",videoNum);
         return "page/main";
     }
 

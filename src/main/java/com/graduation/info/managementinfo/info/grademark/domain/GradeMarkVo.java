@@ -19,4 +19,55 @@ public class GradeMarkVo implements Serializable {
     private String year;
     //备用字段
     private String jljljl;
+
+    public GradeMarkVo() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getScId() {
+        return scId;
+    }
+
+    public void setScId(Integer scId) {
+        this.scId = scId;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getJljljl() {
+        return jljljl;
+    }
+
+    public void setJljljl(String jljljl) {
+        this.jljljl = jljljl;
+    }
 }

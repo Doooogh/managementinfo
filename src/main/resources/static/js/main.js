@@ -1,3 +1,4 @@
+var username=$("#username").val();
 //获取系统时间
 var newDate = '';
 getLangDate();
@@ -19,7 +20,7 @@ function getLangDate(){
     var second = dateObj.getSeconds(); //当前系统时间的秒钟值
     var timeValue = "" +((hour >= 12) ? (hour >= 18) ? "晚上" : "下午" : "上午" ); //当前时间属于上午、晚上还是下午
     newDate = dateFilter(year)+"年"+dateFilter(month)+"月"+dateFilter(date)+"日 "+" "+dateFilter(hour)+":"+dateFilter(minute)+":"+dateFilter(second);
-    document.getElementById("nowTime").innerHTML = "亲爱的驊驊龔頾，"+timeValue+"好！ 欢迎使用layuiCMS 2.0模版。当前时间为： "+newDate+"　"+week;
+    document.getElementById("nowTime").innerHTML = "亲爱的"+username+","+timeValue+"好！ 当前时间为： "+newDate+"　"+week;
     setTimeout("getLangDate()",1000);
 }
 
@@ -81,7 +82,7 @@ layui.use(['form','element','layer','jquery'],function(){
                 +'<td>'+data.data[i].newsTime.substring(0,10)+'</td>'
                 +'</tr>';
         }
-        $(".hot_news").html(hotNewsHtml);
+
         $(".userAll span").text(data.length);
     })
 

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<title>Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- font files  -->
+<link href='/css/login/css1.css' rel='stylesheet' type='text/css'>
+<link href='/css/login/css2.css' rel='stylesheet' type='text/css'>
+<!-- /font files  -->
+<!-- css files -->
+<link href="/css/login/style.css" rel='stylesheet' type='text/css' media="all" />
+<!-- /css files -->
+</head>
+<body>
+<h1>考研信息网登陆</h1>
+<div class="log">
+	<div class="content1">
+		<h2>登陆</h2>
+		<form autocomplete="off">
+			<input type="text" name="username" id="username" placeholder="username"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'username';}">
+			<input type="password" name="password" id="password" placeholder="******"onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '******';}">
+			<div class="button-row">
+				<button type="button" id="submit" class="sign-in" >登陆</button>
+				<input type="reset" class="reset" value="清除">
+				<div class="clear"></div>
+			</div>
+		</form>
+		<div style="" id="msg" th:text="${msg}==null?'':${msg}"></div>
+	</div>
+
+	<div class="clear"></div>
+</div>
+<div th:include="include::footer"></div>
+<script src="/js/login/login.js"></script>
+</body>
+</html>

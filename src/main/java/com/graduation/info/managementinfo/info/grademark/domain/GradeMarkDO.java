@@ -24,7 +24,7 @@ public class GradeMarkDO implements Serializable {
 	//分数线
 	private Integer grade;
 	//备用字段
-	private String klklkl;
+	private String year;
 	//备用字段
 	private String jljljl;
 
@@ -79,14 +79,14 @@ public class GradeMarkDO implements Serializable {
 	/**
 	 * 设置：备用字段
 	 */
-	public void setKlklkl(String klklkl) {
-		this.klklkl = klklkl;
+	public void setYear(String year) {
+		this.year = year;
 	}
 	/**
 	 * 获取：备用字段
 	 */
-	public String getKlklkl() {
-		return klklkl;
+	public String getYear() {
+		return year;
 	}
 	/**
 	 * 设置：备用字段

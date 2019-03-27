@@ -1,6 +1,16 @@
 $().ready(function() {
 	validateRule();
+	setSelectOption();
 });
+function setSelectOption(){
+    var now = new Date();
+    var year = now.getFullYear(); //获取当前年份
+	var option="<option></option>";
+	for(var i=year;i>year-20;i--){
+		var o=$("<option>").append(option).val(i).text(i);
+		$("#year").append(o);
+	}
+}
 
 $.validator.setDefaults({
 	submitHandler : function() {

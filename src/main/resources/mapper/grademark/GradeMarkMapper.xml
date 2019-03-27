@@ -4,17 +4,17 @@
 <mapper namespace="com.graduation.info.managementinfo.info.grademark.dao.GradeMarkDao">
 
 	<select id="get" resultType="com.graduation.info.managementinfo.info.grademark.domain.GradeMarkDO">
-		select `id`,`sc_id`,`m_id`,`grade`,`klklkl`,`jljljl` from grade_mark where id = #{value}
+		select `id`,`sc_id`,`m_id`,`grade`,`year`,`jljljl` from grade_mark where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.graduation.info.managementinfo.info.grademark.domain.GradeMarkDO">
-		select `id`,`sc_id`,`m_id`,`grade`,`klklkl`,`jljljl` from grade_mark
+		select `id`,`sc_id`,`m_id`,`grade`,`year`,`jljljl` from grade_mark
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="scId != null and scId != ''"> and sc_id = #{scId} </if>
 		  		  <if test="mId != null and mId != ''"> and m_id = #{mId} </if>
 		  		  <if test="grade != null and grade != ''"> and grade = #{grade} </if>
-		  		  <if test="klklkl != null and klklkl != ''"> and klklkl = #{klklkl} </if>
+		  		  <if test="year != null and year != ''"> and year = #{year} </if>
 		  		  <if test="jljljl != null and jljljl != ''"> and jljljl = #{jljljl} </if>
 		  		</where>
         <choose>
@@ -37,7 +37,7 @@
 		  		  <if test="scId != null and scId != ''"> and sc_id = #{scId} </if>
 		  		  <if test="mId != null and mId != ''"> and m_id = #{mId} </if>
 		  		  <if test="grade != null and grade != ''"> and grade = #{grade} </if>
-		  		  <if test="klklkl != null and klklkl != ''"> and klklkl = #{klklkl} </if>
+		  		  <if test="year != null and year != ''"> and year = #{year} </if>
 		  		  <if test="jljljl != null and jljljl != ''"> and jljljl = #{jljljl} </if>
 		  		</where>
 	</select>
@@ -48,7 +48,7 @@
 			`sc_id`, 
 			`m_id`, 
 			`grade`, 
-			`klklkl`, 
+			`year`,
 			`jljljl`
 		)
 		values
@@ -56,7 +56,7 @@
 			#{scId}, 
 			#{mId}, 
 			#{grade}, 
-			#{klklkl}, 
+			#{year},
 			#{jljljl}
 		)
 	</insert>
@@ -67,7 +67,7 @@
 			<if test="scId != null">`sc_id` = #{scId}, </if>
 			<if test="mId != null">`m_id` = #{mId}, </if>
 			<if test="grade != null">`grade` = #{grade}, </if>
-			<if test="klklkl != null">`klklkl` = #{klklkl}, </if>
+			<if test="year != null">`year` = #{year}, </if>
 			<if test="jljljl != null">`jljljl` = #{jljljl}</if>
 		</set>
 		where id = #{id}

@@ -61,7 +61,7 @@ CREATE TABLE `grade_mark` (
   `sc_id` int(16) DEFAULT NULL COMMENT '学校id',
   `m_id` int(16) DEFAULT NULL COMMENT '专业id',
   `grade` int(16) DEFAULT NULL COMMENT '分数线',
-  `klklkl` varchar(16) DEFAULT NULL COMMENT '备用字段',
+  `year` varchar(16) DEFAULT NULL COMMENT '备用字段',
   `jljljl` varchar(16) DEFAULT NULL COMMENT '备用字段',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

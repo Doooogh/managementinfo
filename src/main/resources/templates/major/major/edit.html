@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
@@ -17,9 +17,9 @@
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">备用字段：</label>
+								<label class="col-sm-3 control-label">年份：</label>
 								<div class="col-sm-8">
-									<input id="cdcdcd" name="cdcdcd" th:value="${major.cdcdcd}" class="form-control" type="text">
+									<input id="cdcdcd" name="cdcdcd" th:value="${major.cdcdcd}" class="form-control" readonly type="text">
 								</div>
 							</div>
 														<div class="form-group">	

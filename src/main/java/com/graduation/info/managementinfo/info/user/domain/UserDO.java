@@ -45,6 +45,14 @@ public class UserDO implements Serializable {
 
 	private List<Integer> roleIds;
 
+	public UserDO() {
+	}
+
+	public UserDO(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+
 	public List<Integer> getRoleIds() {
 		return roleIds;
 	}

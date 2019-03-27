@@ -28,7 +28,6 @@ import java.util.LinkedHashMap;
 
 @Configuration
 public class ShiroConfig {
-/*
     @Value("${spring.redis.host}")
     private String host;
     @Value("${spring.redis.password}")
@@ -37,10 +36,6 @@ public class ShiroConfig {
     private int port;
     @Value("${spring.redis.timeout}")
     private int timeout;
-
-    @Value("${spring.cache.type}")
-    private String cacheType ;
-
     @Value("${server.session-timeout}")
     private int tomcatTimeout;
 
@@ -51,11 +46,11 @@ public class ShiroConfig {
     }
 
 
-    *//**
+    /**
      * ShiroDialect，为了在thymeleaf里使用shiro的标签的bean
      *
      * @return
-     *//*
+     */
     @Bean
     public ShiroDialect shiroDialect() {
         return new ShiroDialect();
@@ -77,6 +72,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/css/**", "anon"); //匿名访问静态资源
         filterChainDefinitionMap.put("/js/**", "anon"); //匿名访问静态资源
         filterChainDefinitionMap.put("/img/**", "anon"); //匿名访问静态资源
+        filterChainDefinitionMap.put("/vendor/**", "anon"); //匿名访问静态资源
         filterChainDefinitionMap.put("/assets/**", "anon"); //匿名访问静态资源
         filterChainDefinitionMap.put("/fonts/**", "anon"); //匿名访问静态资源
         filterChainDefinitionMap.put("/permission/**", "anon"); //匿名访问静态资源
@@ -95,18 +91,16 @@ public class ShiroConfig {
         //设置realm.
         securityManager.setRealm(userRealm());
         // 自定义缓存实现 使用redis
-        if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
-            securityManager.setCacheManager(rediscacheManager());
-        } else {
-            securityManager.setCacheManager(ehCacheManager());
-        }
+
+        securityManager.setCacheManager(ehCacheManager());
+
         securityManager.setSessionManager(sessionManager());
         return securityManager;
     }
 
-    *//**
+    /**
      * shiro session的管理
-     *//*
+     */
     @Bean
     public DefaultWebSessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
@@ -119,10 +113,10 @@ public class ShiroConfig {
     }
 
 
-    *//**
+    /**
      * RedisSessionDAO shiro sessionDao层的实现 通过redis
      * 使用的是shiro-redis开源插件
-     *//*
+     */
     @Bean
     public RedisSessionDAO redisSessionDAO() {
         RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
@@ -132,30 +126,26 @@ public class ShiroConfig {
 
     @Bean
     public SessionDAO sessionDAO() {
-        if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
-            return redisSessionDAO();
-        } else {
             return new MemorySessionDAO();
-        }
     }
 
-    *//**
+    /**
      * cacheManager 缓存 redis实现
      * 使用的是shiro-redis开源插件
      *
      * @return
-     *//*
+     */
     public RedisCacheManager rediscacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
         redisCacheManager.setRedisManager(redisManager());
         return redisCacheManager;
     }
 
-    *//**
+    /**
      * 配置shiro redisManager
      *
      * @return
-     *//*
+     */
     @Bean
     public RedisManager redisManager() {
         RedisManager redisManager = new RedisManager();
@@ -183,19 +173,19 @@ public class ShiroConfig {
         return userRealm;
     }
 
-    *//**
+    /**
      * 开启shiro aop注解支持.
      * 使用代理方式;所以需要开启代码支持;
      *
      * @param securityManager
      * @return
-     *//*
+     */
 
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
-    }*/
+    }
 }
 

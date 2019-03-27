@@ -35,7 +35,7 @@ public class LoginController {
 
     @GetMapping("/403")
     public String login1(){
-        return "/noPer";
+        return "error/noPer";
     }
 
 
@@ -43,7 +43,8 @@ public class LoginController {
     @PostMapping("/login")
     @ResponseBody
     public R login(String username, String password) {
-        UserDO user=userService.getByUsername(username);
+        UserDO user=new UserDO(username,password);
+
         Subject subject = SecurityUtils.getSubject();
         if(user!=null){
             subject.getSession().setAttribute("user",user);

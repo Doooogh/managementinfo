@@ -84,7 +84,7 @@ function load() {
 									field : 'id',
 									title : '分数线',
                                     formatter:function (value,row,index) {
-                                        var str="<a style=\"text-decoration:none;\" onclick=\"lookEnrollmentGuide("+value+")\">查看</a>";
+                                        var str="<a style=\"text-decoration:none;\" onclick=\"lookGradeMark("+value+")\">查看</a>";
                                         return str;
                                     }
 								},
@@ -348,6 +348,54 @@ function lookVideoDatabase(id) {
                 element.tabAdd('bodyTab', {
                     title: title //用于演示
                     ,content:"<iframe src='" + "/school/school/lookVideoDatabase/"+id+"' ></iframe>"
+                    ,id: tid //实际使用一般是规定好的id，这里以时间戳模拟下
+                });
+
+            }
+            ,tabDelete: function(othis){
+                //删除指定Tab项
+                element.tabDelete('bodyTab', tid); //删除：“商品管理”
+
+
+                othis.addClass('layui-btn-disabled');
+            }
+            ,tabChange: function(){
+                //切换到指定Tab项
+                element.tabChange('bodyTab',tid); //切换到：用户管理
+            }
+        };
+
+
+        active.tabAdd();
+        active.tabChange();
+
+
+        //Hash地址的定位
+        var layid = location.hash.replace(/^#test=/, '');
+        element.tabChange('test', layid);
+
+        element.on('tab(test)', function(elem){
+            location.hash = 'test='+ $(this).attr('lay-id');
+        });
+
+    });
+}
+
+function lookGradeMark(id) {
+    var title='分数线';
+    layui.use('element', function(){
+        var $ = layui.jquery
+            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+        element=parent.window.e;
+        var tid='newTab'+new Date().getTime();
+        //触发事件
+        var active = {
+            tabAdd: function(){
+                $('#top_tabs_box', window.parent.document).attr("lay-allowClose","true");
+                //新增一个Tab项
+                element.tabAdd('bodyTab', {
+                    title: title //用于演示
+                    ,content:"<iframe src='" + "/grademark/gradeMark?scId="+id+"' ></iframe>"
                     ,id: tid //实际使用一般是规定好的id，这里以时间戳模拟下
                 });
 

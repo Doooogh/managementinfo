@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
-<head th:include="include :: header"></head>
+<head th:include="include :: headerv245"></head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
 		<div class="row">
@@ -30,6 +30,13 @@
 									<input id="url" name="url" th:value="${permission.url}" class="form-control" type="text">
 								</div>
 							</div>
+
+							<div class="form-group" style="display: none" id="formIcon">
+								<label class="col-sm-3 control-label">图标：</label>
+								<div class="col-sm-8" id="getIcon">
+									<input id="img" name="img" th:value="${permission.img}" class="form-control" type="hidden">
+							</div>
+							</div>
 														<div class="form-group">	
 								<label class="col-sm-3 control-label">权限标识：</label>
 								<div class="col-sm-8">
@@ -39,6 +46,7 @@
 														<div class="form-group">	
 								<label class="col-sm-3 control-label">类型：</label>
 								<div class="col-sm-8">
+									<input type="hidden" th:value="${permission.type }" id="perType">
 									<select class="form-control" name="type">
 										<!--<option value="">&#45;&#45;请选择房东&#45;&#45;</option>-->
 										<option value="0" th:select="${permission.type == 0}">目录</option>
@@ -59,8 +67,8 @@
 			</div>
 	</div>
 	</div>
-	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/permission/permission/edit.js">
+	<div th:include="include::footerv245"></div>
+	<script type="text/javascript" src="/js/appjs/permission/permission/edit.js?v=1">
 	</script>
 </body>
 </html>

@@ -35,14 +35,14 @@ public class RoleController {
 	private RoleService roleService;
 
 	@GetMapping()
-	@RequiresPermissions("role:role:role")
+//	@RequiresPermissions("role:role:role")
 	String Role(){
 		return "role/role/role";
 	}
 
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("role:role:role")
+//	@RequiresPermissions("role:role:role")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
 		Query query = new Query(params);

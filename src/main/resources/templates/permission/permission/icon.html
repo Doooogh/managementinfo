@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include :: headerv245"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #main{
+            width: 100%;
+            height: auto;
+            padding: 3px;
+        }
+        #icon{
+            width: 40px;
+            height: 40px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <input id="id" type="hidden" th:value="${id}==null?'':${id}"/>
+        <div id="icon" th:each="icon :${icons}">
+            <a class="">
+                <i class="layui-icon" style="font-size: 30px !important; color: #272829" th:attr="iclass=${icon.fontClass}"
+                    th:class="${icon.fontClass}+' layui-icon'+' formicon'"></i>
+            </a>
+        </div>
+    </div>
+    <div th:include="include::footerv245"></div>
+<script src="/js/appjs/permission/permission/icon.js"></script>
+</body>
+</html>

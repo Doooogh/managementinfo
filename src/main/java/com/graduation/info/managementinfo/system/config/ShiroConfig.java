@@ -67,7 +67,8 @@ public class ShiroConfig {
 //        filterChainDefinitionMap.put("/**", "anon");
         filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/login/**", "anon");
-//        filterChainDefinitionMap.put("/index/**", "anon");
+        filterChainDefinitionMap.put("/logout1", "logout");  // 退出登录的操作
+        filterChainDefinitionMap.put("/role/role/**", "anon");
         filterChainDefinitionMap.put("/tem/", "anon"); //匿名访问静态资源
         filterChainDefinitionMap.put("/css/**", "anon"); //匿名访问静态资源
         filterChainDefinitionMap.put("/js/**", "anon"); //匿名访问静态资源

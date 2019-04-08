@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.graduation.info.managementinfo.info.common.entity.Tree;
+import com.graduation.info.managementinfo.info.icon.domain.IconDO;
+import com.graduation.info.managementinfo.info.icon.service.IconService;
 import com.graduation.info.managementinfo.system.utils.PageUtils;
 import com.graduation.info.managementinfo.system.utils.Query;
 import com.graduation.info.managementinfo.system.utils.R;
@@ -38,6 +40,9 @@ import com.graduation.info.managementinfo.info.permission.service.PermissionServ
 public class PermissionController {
 	@Autowired
 	private PermissionService permissionService;
+
+	@Autowired
+	private IconService iconService;
 
 	@GetMapping()
 	@RequiresPermissions("permission:permission:permission")
@@ -86,6 +91,11 @@ public class PermissionController {
 			parentName="顶级权限";
 		}else{
 			parentName=permissionService.get(parentId).getName();
+		}
+		Integer type=permission.getType();
+		if(type==0){
+			List<IconDO> iconList = iconService.list(new HashMap<>());
+			model.addAttribute("icons",iconList);
 		}
 		model.addAttribute("permission", permission);
 		model.addAttribute("parentName", parentName);
@@ -175,6 +185,18 @@ public class PermissionController {
 		Tree<PermissionDO> tree = permissionService.getTree();
 		System.out.println(tree);
 		return tree;
+	}
+
+	@GetMapping("/getIcon/{id}")
+	public String getIcon(@PathVariable("id") Integer id,Model model){
+
+		List<IconDO> icons = iconService.list(new HashMap<>());
+		model.addAttribute("icons",icons);
+		if(id!=-1){
+			model.addAttribute("id",id);
+		}
+
+		return "permission/permission/icon";
 	}
 
 

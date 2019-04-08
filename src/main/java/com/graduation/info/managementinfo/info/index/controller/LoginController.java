@@ -43,18 +43,16 @@ public class LoginController {
     @PostMapping("/login")
     @ResponseBody
     public R login(String username, String password) {
-        UserDO user=new UserDO(username,password);
+        UserDO user=userService.getByUsername(username);
 
-        Subject subject = SecurityUtils.getSubject();
-        if(user!=null){
-            subject.getSession().setAttribute("user",user);
-        }else{
+        if(user==null){
             return R.error(1,"账号不存在");
         }
-        System.out.println(subject.getSession().getAttribute("user")+"---------------------------00000000000000");
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
+        Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);//会跳到我们自定义的realm中
+            subject.getSession().setAttribute("user",user);
         } catch (Exception e) {
             String exceptionClassName = e.getClass().getName();
             System.out.println(exceptionClassName+"-------------------------------");

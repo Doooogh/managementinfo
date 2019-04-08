@@ -51,11 +51,12 @@ function load() {
 									field : 'img',
 									title : '图标',
                                     formatter:function (item,index) {
-										var img1="";
+										var i="";
 										if(item.img!=null){
-											img1="<i class=\"layui-icon\" >"+item.img+"</i>";
+											 i="<i class=\"layui-icon  "+item.img+"\"  style=\"font-size:20px  !important;color:#2b2a2a !important; \" \"></i>";
+											console.log(item.img);
 										}
-										return img1;
+										return i;
                                     }
 								},
 								{

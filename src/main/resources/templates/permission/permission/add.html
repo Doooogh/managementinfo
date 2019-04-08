@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
-<head th:include="include :: header"></head>
+<head th:include="include :: headerv245"></head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
 		<div class="row">
@@ -41,10 +41,10 @@
 								</div>
 							</div>
 
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">类型：</label>
-								<div class="col-sm-8">
-									<select class="form-control" name="type">
+								<div class="col-sm-8" >
+									<select class="form-control" id="type" name="type">
 										<option value="">--请选择类型--</option>
 										<option value="0">目录</option>
 										<option value="1">菜单</option>
@@ -52,7 +52,16 @@
 									</select>
 								</div>
 							</div>
-								<div class="form-group">
+							<div class="form-group" style="display: none" id="formIcon">
+								<label class="col-sm-3 control-label">图标：</label>
+								<div class="col-sm-8" id="getIcon">
+									<input id="img" name="img" class="form-control" type="hidden">
+									<i class="" id="ficon" style="margin-right: 10px;font-size: 20px" ></i>
+									<input type="button" id="setIcon" class="btn btn-warning btn-sm"  onclick="getIcosList()" value="选择图标">
+								</div>
+
+							</div>
+							<div class="form-group" style="margin-top: 20px">
 								<div class="col-sm-8 col-sm-offset-3">
 									<button type="submit" class="btn btn-primary">提交</button>
 								</div>
@@ -63,8 +72,8 @@
 			</div>
 	</div>
 	</div>
-	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/permission/permission/add.js">
-	</script>
+	<div th:include="include::footerv245"></div>
+	<script type="text/javascript" src="/js/appjs/permission/permission/add.js"></script>
+	<script src="/js/appjs/permission/permission/addIcon.js"></script>
 </body>
 </html>

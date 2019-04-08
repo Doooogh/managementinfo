@@ -19,7 +19,8 @@ public class MenuTree {
     private UserDao userDao;
 
     public MenuItem getTreeByUserId(Integer userId){
-        Set<PermissionDO> pers =userDao.getPermissionsByUserId(1);
+        System.out.println("userId为................"+userId);
+        Set<PermissionDO> pers =userDao.getPermissionsByUserId(userId);
         List<Tree1<PermissionDO>> trees=new ArrayList<>();
         for (PermissionDO per : pers) {
             if(per.getType()!=2) {

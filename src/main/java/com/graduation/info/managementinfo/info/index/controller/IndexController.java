@@ -60,6 +60,7 @@ public class IndexController {
     @ResponseBody
     public MenuItem getTree(){
         UserDO user= (UserDO) ShiroUtils.getSubjct().getSession().getAttribute("user");
+        System.out.println(user.getUsername()+"............................"+user.getUserId());
         return menuTree.getTreeByUserId(user.getUserId());
     }
 
@@ -68,8 +69,6 @@ public class IndexController {
         Map<String,Object> map=new HashMap();
         UserDO user= (UserDO) ShiroUtils.getSubjct().getSession().getAttribute("user");
         String username=user.getUsername();
-
-
         Integer schoolNum=schoolService.count(map);
         Integer testquestionNum = testQuestionService.count(map);
         Integer videoNum=videoDatabaseService.count(map);
